@@ -1,69 +1,59 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import ButtonLink from "@/components/ui/ButtonLink";
+import SectionTitle from "@/components/ui/SectionTitle";
+import ServiceCard from "@/components/ui/ServiceCard";
+import { SERVICES } from "@/data/services";
 
-export default function Home() {
+const STATS = [
+  { angka: "50+", label: "Klien dilayani" },
+  { angka: "24/7", label: "Pemantauan sistem" },
+  { angka: "99,9%", label: "Target uptime" },
+];
+
+export default function Beranda() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="hero">
+        <div className="container">
+          <p className="eyebrow">Mitra Teknologi Informasi Anda</p>
+          <h1>Infrastruktur IT yang andal untuk bisnis yang terus bertumbuh</h1>
+          <p className="hero-sub">
+            Garuda Byte membantu perusahaan mengelola, mengamankan, dan mengembangkan teknologinya, sehingga Anda bisa fokus pada hal yang paling penting.
           </p>
+          <div className="btn-row">
+            <ButtonLink href="/layanan">Lihat Layanan</ButtonLink>
+            <ButtonLink href="/kontak" variant="outline">Hubungi Kami</ButtonLink>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="container stats">
+        {STATS.map((s) => (
+          <div key={s.label}>
+            <strong>{s.angka}</strong>
+            <span className="muted">{s.label}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="container section">
+        <SectionTitle judul="Layanan Unggulan" sub="Solusi IT yang kami siapkan untuk berbagai kebutuhan bisnis." />
+        <div className="grid">
+          {SERVICES.slice(0, 3).map((s) => (
+            <ServiceCard key={s.slug} service={s} />
+          ))}
         </div>
-      </main>
-    </div>
+        <div className="center">
+          <ButtonLink href="/layanan" variant="outline">Semua Layanan</ButtonLink>
+        </div>
+      </section>
+
+      <section className="cta">
+        <div className="container">
+          <h2>Siap meningkatkan IT perusahaan Anda?</h2>
+          <p>Konsultasikan kebutuhan Anda dengan tim kami, tanpa biaya.</p>
+          <ButtonLink href="/kontak">Mulai Konsultasi</ButtonLink>
+        </div>
+      </section>
+    </>
   );
 }
